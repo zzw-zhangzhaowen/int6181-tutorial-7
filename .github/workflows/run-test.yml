@@ -1,0 +1,24 @@
+name: Run Test
+
+# Run the provided test suite automatically whenever code is pushed
+# and on every pull request.
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: CheckOut Your Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run teacher tests
+        run: python -m unittest discover -s . -p "test_*.py" -v
